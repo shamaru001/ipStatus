@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from models.models import Base
-
+from config import DATABASE_CONNECTION_URI
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -41,7 +41,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = config.get_main_option("postgresql+psycopg2://myuser:mypassword@127.0.0.1:5432/mydb")
+    url = config.get_main_option(DATABASE_CONNECTION_URI)
     context.configure(
         url=url,
         target_metadata=target_metadata,

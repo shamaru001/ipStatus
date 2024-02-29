@@ -1,9 +1,7 @@
 from sqlalchemy import create_engine
-from sqlalchemy.sql import text
+from config import DATABASE_CONNECTION_URI
 
-engine = create_engine("postgresql+psycopg2://myuser:mypassword@127.0.0.1:5432/mydb")
-
-
+engine = create_engine(DATABASE_CONNECTION_URI)
 def getDB():
     return engine.connect()
         
