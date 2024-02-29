@@ -6,7 +6,7 @@ class statusModel(Base):
     __tablename__ = "status"
 
     id = Column(Integer, primary_key=True)
-    ip = Column(String,  ForeignKey(addressModel.id))
+    address_id = Column(Integer,  ForeignKey(addressModel.id))
     status = Column(Boolean)
     create_at = Column(DateTime, default=func.now())
 

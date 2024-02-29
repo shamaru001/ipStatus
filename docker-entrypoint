@@ -1,0 +1,20 @@
+#!/bin/bash
+if [ ! -f /tmp/seeders ]; then
+    migration=0;
+    while [ $migration -eq 0  ]; do
+        database_ready=$((echo >/dev/tcp/$POSTGRES_HOST/$POSTGRES_PORT) &>/dev/null && echo "1" || echo "0")
+
+        if [ $database_ready -eq "1" ]; then
+            migration=1;
+        else
+            echo "Waiting for database is ready";
+            sleep 5;
+        fi
+    done
+fi
+
+export FLASK_APP=app.py
+
+python -m alembic upgrade head
+
+python -m flask run --debug -h 0.0.0.0 

@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  flask_app:
+    container_name: "api"
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/code
+    links:
+      - flask_db
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: mydb
+      POSTGRES_PORT: 5432
+      POSTGRES_HOST: flask_db
+  flask_db:
+    container_name: "database"
+    image: postgres:15.6
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+
+networks:
+  myapi:
+    name: myapi
+    driver: bridge
