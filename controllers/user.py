@@ -1,27 +1,29 @@
-from flask.views import MethodView
+import sys
+from flask import request
 from sqlalchemy import select
 from models.user import UserModel
-from db import getDB
+from .helpers import Encrypt, Serializer
 
+class UserController():
 
-class UserController(MethodView):
+    @staticmethod
+    def getAll():
+        users = UserModel.findAll(select(UserModel))
+        return Serializer.serialize_list(users)
 
-    def get(self):
-        with getDB() as conn:
-            users = conn.scalars(select(UserModel)).fetchall()
-            return users
-    
-    def post(self):
+    @staticmethod
+    def get(id=None):
+        user = UserModel.findOne(select(UserModel).where(UserModel.id == id))
+        return Serializer.serialize(user)
 
-        user = UserModel(name='123', password='231')
-        with getDB() as conn:
-            conn
     
-    def delete(self):
-        return 'delete'
-    
-    def patch(self): 
-        return 'patch'
-    
-    def put(self):
-        return 'put'
+    @staticmethod
+    def post():
+        content = request.json
+        password = Encrypt.encrypt(content["password"])
+        user = UserModel(name=content['name'], password=password)
+        user.create()
+
+        return {
+            "created": True,
+        }

@@ -5,8 +5,6 @@ class addressModel(Base):
     __tablename__ = "address"
 
     id = Column(Integer, primary_key=True)
-    address = Column(String)
+    address = Column(String, unique=True)
     create_at = Column(DateTime, default=func.now())
 
-    def __repr__(self): 
-        return f"id: {self.id}, name: {self.name}"
