@@ -1,21 +1,28 @@
-from flask.views import MethodView
-
+import sys
+from flask import request
+from sqlalchemy import select
 from models.address import addressModel
+from helpers import Encrypt, Serializer
 
+class AddressController():
 
-class UserController(MethodView):
+    @staticmethod
+    def getAll():
+        address = addressModel.findAll(select(addressModel))
+        return Serializer.serialize_list(address)
 
-    def get(self):
-        return 'hola desde un metodo'
+    @staticmethod
+    def get(id=None):
+        address = addressModel.findOne(addressModel.id, id)
+        return Serializer.serialize(address)
+
     
-    def post(self):
-        return 'post'
-    
-    def delete(self):
-        return 'delete'
-    
-    def patch(self): 
-        return 'patch'
-    
-    def put(self):
-        return 'put'
+    @staticmethod
+    def post():
+        content = request.json
+        address = addressModel(address=content['address'])
+        address.create()
+
+        return {
+            "created": True,
+        }

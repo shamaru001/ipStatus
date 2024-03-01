@@ -15,6 +15,6 @@ fi
 
 export FLASK_APP=app.py
 
-python -m alembic upgrade head
+python -m alembic upgrade heads
 
 python -m flask run --debug -h 0.0.0.0 
