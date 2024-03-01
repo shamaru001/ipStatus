@@ -32,6 +32,7 @@ def upgrade() -> None:
     op.create_table('address',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('address', sa.String(), nullable=True),
+    sa.Column('name', sa.String(), nullable=True),
     sa.Column('create_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )

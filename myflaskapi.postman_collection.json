@@ -117,7 +117,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"address\": \"192.168.25.35\"\r\n}",
+							"raw": "{\r\n    \"address\": \"192.168.25.35\",\r\n    \"name\": \"una IP local\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -240,7 +240,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -248,12 +248,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{server}}/ping",
+					"raw": "{{server}}/ping/1",
 					"host": [
 						"{{server}}"
 					],
 					"path": [
-						"ping"
+						"ping",
+						"1"
 					]
 				}
 			},

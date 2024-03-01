@@ -30,7 +30,7 @@ class AddressController():
     @staticmethod
     def post():
         content = request.json
-        address = addressModel(address=content['address'])
+        address = addressModel(address=content['address'], name=content["name"])
         address.create()
 
         return {

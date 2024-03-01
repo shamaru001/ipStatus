@@ -7,5 +7,6 @@ class addressModel(Base, Model):
 
     id = Column(Integer, primary_key=True)
     address = Column(String, unique=True)
+    name = Column(String)
     create_at = Column(DateTime, default=func.now())
 

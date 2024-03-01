@@ -31,6 +31,7 @@ def router(app):
 
    #PING
     @app.route('/ping/<int:address_id>', methods=['GET'])
+    @token_required
     def ping(address_id):
         return PingController.checkAddress(address_id)
     
