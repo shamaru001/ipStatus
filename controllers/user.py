@@ -2,7 +2,7 @@ import sys
 from flask import request
 from sqlalchemy import select
 from models.user import UserModel
-from .helpers import Encrypt, Serializer
+from helpers import Encrypt, Serializer
 
 class UserController():
 
@@ -13,7 +13,7 @@ class UserController():
 
     @staticmethod
     def get(id=None):
-        user = UserModel.findOne(select(UserModel).where(UserModel.id == id))
+        user = UserModel.findOne(UserModel.id, id)
         return Serializer.serialize(user)
 
     
@@ -21,7 +21,7 @@ class UserController():
     def post():
         content = request.json
         password = Encrypt.encrypt(content["password"])
-        user = UserModel(name=content['name'], password=password)
+        user = UserModel(name=content['name'], password=password, email=content['email'])
         user.create()
 
         return {

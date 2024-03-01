@@ -1,7 +1,7 @@
 from sqlalchemy import Column, DateTime, String, Integer, func
-from models import Base
+from models import Base, Model
 
-class addressModel(Base):
+class addressModel(Base, Model):
     __tablename__ = "address"
 
     id = Column(Integer, primary_key=True)

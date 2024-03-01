@@ -1,8 +1,8 @@
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, func, Boolean
-from models import Base
+from models import Base, Model
 from models.address import addressModel
 
-class statusModel(Base):
+class statusModel(Base, Model):
     __tablename__ = "status"
 
     id = Column(Integer, primary_key=True)

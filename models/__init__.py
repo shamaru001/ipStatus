@@ -10,13 +10,13 @@ class Model():
 
     @classmethod
     def findAll(self, consult):
-        with getDB() as conn:
-            return conn.scalars(consult).fetchall()
+        with getDB() as session:
+            return session.scalars(consult).fetchall()
     
     @classmethod
-    def findOne(self, consult):
-        with getDB() as conn:
-            return conn.scalars(consult).one()
+    def findOne(self, column, id):
+        with getDB() as session:
+            return session.query(self).filter(column == id).first()
 
     
     def create(self):
