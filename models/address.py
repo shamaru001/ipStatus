@@ -7,6 +7,5 @@ class addressModel(Base, Model):
 
     id = Column(Integer, primary_key=True)
     address = Column(String, unique=True)
-    # status = relationship("status", backref="address_id")
     create_at = Column(DateTime, default=func.now())
 

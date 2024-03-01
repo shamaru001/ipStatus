@@ -1,4 +1,5 @@
 import sys
+from sqlalchemy import func
 from sqlalchemy.ext.declarative import declarative_base
 from db import getDB
 
@@ -23,3 +24,8 @@ class Model():
         with getDB() as session:
             session.add(self)
             session.commit()
+
+    @classmethod
+    def count_group_by(self, filter_1, filter_2, groupBy):
+        with getDB() as session:
+            return session.query(func.count(self.id)).filter(filter_1).filter(filter_2).group_by(groupBy).scalar()
